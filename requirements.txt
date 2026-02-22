@@ -2,5 +2,6 @@ streamlit
 openai
 langchain-huggingface
 langchain-chroma
-
 pymupdf
+sentence-transformers
+
