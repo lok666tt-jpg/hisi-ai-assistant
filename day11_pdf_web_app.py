@@ -8,7 +8,7 @@ import pickle
 import jieba
 
 st.set_page_config(page_title="HiSi 智能业务大脑", page_icon="✈️")
-st.title("✈️ HiSi-G.I.D.S. V2.0 (双引擎记忆版)")
+st.title("✈️ HiSi-G.I.D.S. V3.0 (双引擎记忆版)")
 st.caption("已挂载：语义向量引擎 + BM25 精确匹配引擎。随便拷问极度生僻的设备型号！")
 
 # ================= 1. 挂载双引擎 =================
@@ -87,4 +87,5 @@ if prompt := st.chat_input("请输入您的问题（试着搜一个极其精确�
         answer = response.choices[0].message.content
         st.markdown(answer)
         st.session_state.messages.append({"role": "assistant", "content": answer})
+
 
