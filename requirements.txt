@@ -8,5 +8,4 @@ rank_bm25
 jieba
 langchain-community
 langchain
-
-
+langchain-classic
