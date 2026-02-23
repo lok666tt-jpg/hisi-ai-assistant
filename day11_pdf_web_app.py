@@ -17,10 +17,10 @@ def load_all_engines():
     embedding_model = HuggingFaceEmbeddings(model_name="BAAI/bge-small-zh-v1.5")
     
     # --- 抽屉 A：航显系统 (双引擎满配版) ---
-    hisi_vector_db = Chroma(persist_directory="hisi_vdb", embedding_function=embedding_model)
+    hisi_vector_db = Chroma(persist_directory="airport_vdb", embedding_function=embedding_model)
     hisi_vector_retriever = hisi_vector_db.as_retriever(search_kwargs={"k": 3})
     
-    with open("hisi_chunks.pkl", "rb") as f:
+    with open("airport_chunks.pkl", "rb") as f:
         hisi_chunks = pickle.load(f)
     def jieba_tokenizer(text): return list(jieba.cut(text))
     hisi_bm25_retriever = BM25Retriever.from_texts(hisi_chunks, preprocess_func=jieba_tokenizer)
@@ -54,10 +54,9 @@ for msg in st.session_state.messages:
 
 # ================= 3. 核心调度与检索流水线 =================
 def classify_intent(question):
-    # 下面这一段，必须比 def 往右缩进 4 个空格！
     prompt = f"""你是一个极其聪明的机场业务总调度员。
     请判断下面这个问题，属于哪个业务领域：
-    A: 航显系统、屏幕参数、软件功能 (HiSi-G.I.D.S)
+    A: 机场项目、航显系统 (HiSi-G.I.D.S)、综合显示系统、机场运行资料
     B: 车辆维修、登机桥、理赔、洗车、工时分配、桥载设备、施工管理、施工现场、维保
     
     你只能回答一个大写字母 'A' 或 'B'，绝对不要输出任何其他标点或废话。
@@ -113,6 +112,7 @@ if prompt := st.chat_input("尝试跨界拷问（如：先问屏幕型号，再�
         answer = response.choices[0].message.content
         st.markdown(answer)
         st.session_state.messages.append({"role": "assistant", "content": answer})
+
 
 
 
