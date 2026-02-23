@@ -4,4 +4,6 @@ langchain-huggingface
 langchain-chroma
 pymupdf
 sentence-transformers
+rank_bm25
+jieba
 
