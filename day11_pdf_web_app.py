@@ -7,7 +7,7 @@ from openai import OpenAI
 import pickle
 import jieba
 
-st.set_page_config(page_title="私人业务调度大脑", page_icon="✈️")
+st.set_page_config(page_title="小徐の业务调度大脑", page_icon="✈️")
 st.title("✈️ 机场/地服 双轨业务大脑")
 st.caption("全领域挂载：航显双引擎 + 维保向量库 + 智能调度路由。")
 
@@ -79,6 +79,7 @@ if prompt := st.chat_input("跨界拷问（例：先问航显参数，再问维�
         answer = response.choices[0].message.content
         st.markdown(answer)
         st.session_state.messages.append({"role": "assistant", "content": answer})
+
 
 
 
